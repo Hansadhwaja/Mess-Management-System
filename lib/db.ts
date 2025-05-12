@@ -13,9 +13,7 @@ export const connectDB = async () => {
         return;
     }
     try {
-        await mongoose.connect(URI, {
-            bufferCommands: false,
-        });
+        await mongoose.connect(URI);
         isConnected = true;
         console.log("MongoDB connected successfully");
     } catch (error) {
