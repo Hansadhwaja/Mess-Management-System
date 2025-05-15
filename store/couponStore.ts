@@ -11,6 +11,7 @@ interface CouponState {
   selectedCoupons: SelectedCoupon[];
   toggleMeal: (day: string, meal: MealType) => void;
   toggleMealsForDay: (day: string, meals: MealType[]) => void;
+  clearSelectedCoupons: () => void;
 }
 
 export const useCouponStore = create<CouponState>()(
@@ -30,8 +31,8 @@ export const useCouponStore = create<CouponState>()(
 
           const updated = newMeals.length
             ? existing.map((e) =>
-                e.day === day ? { ...e, meal: newMeals } : e
-              )
+              e.day === day ? { ...e, meal: newMeals } : e
+            )
             : existing.filter((e) => e.day !== day);
 
           set({ selectedCoupons: updated });
@@ -48,6 +49,9 @@ export const useCouponStore = create<CouponState>()(
           : existing.filter((e) => e.day !== day);
 
         set({ selectedCoupons: updated });
+      },
+      clearSelectedCoupons: () => {
+        set({ selectedCoupons: [] });
       },
     }),
     {

@@ -5,12 +5,8 @@ export const navItems = [
         link: "/"
     },
     {
-        name: "Buy coupon",
-        link: "/buy-coupon"
-    },
-    {
-        name: "Qr code",
-        link: "/qr-code"
+        name: "Coupon",
+        link: "/coupon"
     }
 ];
 

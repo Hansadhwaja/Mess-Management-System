@@ -3,9 +3,8 @@
 import React from "react";
 import { useCouponStore } from "@/store/couponStore";
 import { dayOrder } from "@/constants";
-import { Button } from "../ui/button";
-import Link from "next/link";
 import Loader from "../Loader";
+import PaymentButton from "../Payment/Button";
 
 interface CheckoutListProps {
   timeOptions: {
@@ -24,7 +23,7 @@ const CheckoutList = ({ timeOptions }: CheckoutListProps) => {
       dayOrder.indexOf(b.day.toLowerCase())
   );
 
-  if (selectedCoupons.length===0) return <Loader />;
+  if (selectedCoupons.length === 0) return <Loader />;
 
   return (
     <div className="p-8 rounded-lg">
@@ -67,11 +66,7 @@ const CheckoutList = ({ timeOptions }: CheckoutListProps) => {
       <div className="flex gap-12 text-lg p-8 justify-center">
         <h2 className="lg:text-xl font-semibold mb-4">Total:</h2>
         <p className="font-semibold text-xl xl:text-2xl">₹{total}/-</p>
-        <Link href="/payment">
-          <Button className="bg-orange-500 text-white px-4 py-2 rounded hover:cursor-pointer hover:bg-orange-600">
-            Proceed to payment
-          </Button>
-        </Link>
+        <PaymentButton amount={total} />
       </div>
     </div>
   );
