@@ -17,7 +17,7 @@ const PaymentButton = ({ amount }: { amount: number }) => {
     console.log("Simulating payment for ₹" + amount);
 
     await new Promise((res) => setTimeout(res, 1500));
-    
+
     await createOrder({
       amount,
       coupons: selectedCoupons,
@@ -25,7 +25,7 @@ const PaymentButton = ({ amount }: { amount: number }) => {
     clearSelectedCoupons();
     setIsLoading(false);
     alert("Payment successful! 🎉");
-    router.push("/");
+    router.push("/coupon");
   };
 
   return (
@@ -35,7 +35,7 @@ const PaymentButton = ({ amount }: { amount: number }) => {
     >
       {isLoading ? (
         <>
-          <Loader /> processing
+          <Loader color="white" /> processing
         </>
       ) : (
         `Pay ₹${amount}/- only`

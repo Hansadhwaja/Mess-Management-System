@@ -23,7 +23,7 @@ const CheckoutList = ({ timeOptions }: CheckoutListProps) => {
       dayOrder.indexOf(b.day.toLowerCase())
   );
 
-  if (selectedCoupons.length === 0) return <Loader />;
+  if (selectedCoupons.length === 0) return <Loader color="black" />;
 
   return (
     <div className="p-8 rounded-lg">
