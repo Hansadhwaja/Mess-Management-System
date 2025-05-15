@@ -1,10 +1,9 @@
 "use client";
 import { QRCode } from "react-qrcode-logo";
-import React, { Suspense } from "react";
+import React from "react";
 import { useSearchParams } from "next/navigation";
 import { getFormattedWeek } from "@/lib/utils/getFormattedWeek";
 import { useUser } from "@clerk/nextjs";
-import Loader from "../Loader";
 
 const CouponQRCode = () => {
   const { user } = useUser();
@@ -25,9 +24,8 @@ const CouponQRCode = () => {
         <p className="font-semibold">
           for <span>{day}</span>,<span className="capitalize ml-2">{meal}</span>
         </p>
-        <Suspense fallback={<Loader color="black" />}>
-          <QRCode value={qrData} size={200} />
-        </Suspense>
+
+        <QRCode value={qrData} size={200} />
       </div>
     </div>
   );
