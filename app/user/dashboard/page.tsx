@@ -9,7 +9,7 @@ const UserDashboard = async () => {
   const menuItems = await getMenuItems();
 
   return (
-    <div className="min-h-screen bg-gray-50 py-10 px-4 md:px-8 flex flex-col items-center">
+    <div className="min-h-screen py-10 px-4 md:px-8 flex flex-col items-center">
       <div className="w-full max-w-4xl mb-10">
         <PendingPurchase />
       </div>

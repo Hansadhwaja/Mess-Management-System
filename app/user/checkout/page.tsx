@@ -10,8 +10,8 @@ const Checkout = async () => {
   }));
 
   return (
-    <div className="min-h-screen bg-gray-50 py-10 px-4">
-      <div className="max-w-5xl mx-auto">
+    <div className="min-h-screen py-10 px-4">
+      <div className="max-w-5xl mx-auto bg-white p-4 rounded-2xl shadow-xl">
         <h1 className="text-4xl font-bold text-center text-orange-600 mb-8">
           Checkout
         </h1>
@@ -20,5 +20,4 @@ const Checkout = async () => {
     </div>
   );
 };
-
 export default Checkout;

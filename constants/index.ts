@@ -2,6 +2,10 @@
 export const navItems = [
     {
         name: "Home",
+        link: "/"
+    },
+    {
+        name: "Dashboard",
         link: "/user/dashboard"
     },
     {
@@ -13,6 +17,10 @@ export const navItems = [
 export const adminNavItems = [
     {
         name: "Home",
+        link: "/"
+    },
+    {
+        name: "Dashboard",
         link: "/admin/dashboard"
     },
     {

@@ -16,7 +16,7 @@ const SaveUserToDb = () => {
           },
           body: JSON.stringify({
             id: user.id,
-            name: user.fullName,
+            name: user.fullName || "Admin",
             email: user.primaryEmailAddress?.emailAddress,
             image: user.imageUrl,
           }),

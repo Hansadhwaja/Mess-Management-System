@@ -22,6 +22,7 @@ export async function POST(req: Request) {
                 name,
                 email,
                 image,
+                role: name === "Admin" ? "Admin" : "Student"
             });
         }
 

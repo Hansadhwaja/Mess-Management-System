@@ -19,7 +19,8 @@ interface CouponTableProps {
 }
 
 const CouponTable = ({ breakfast, lunch, dinner, day }: CouponTableProps) => {
-  const { selectedCoupons, toggleMeal, toggleMealsForDay } = useCouponStore();
+  const { selectedCoupons, toggleMeal, toggleMealsForDay } =
+    useCouponStore();
 
   const allMeals: MealType[] = ["breakfast", "lunch", "dinner"];
 

@@ -9,7 +9,7 @@ const CouponPage = async () => {
   const orderExists = order && order.coupons.length > 0;
 
   return (
-    <div className="min-h-screen bg-gray-50 py-10 px-4 flex items-center justify-center">
+    <div className="min-h-screen py-10 px-4 flex items-center justify-center">
       <div className="w-full max-w-3xl bg-white shadow-lg rounded-xl p-6 md:p-10">
         <h1 className="text-3xl font-bold text-center text-orange-600 mb-6">
           {orderExists ? "Your Purchased Coupons" : "Buy Your Meal Coupon"}
