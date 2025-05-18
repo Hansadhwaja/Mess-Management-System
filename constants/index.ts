@@ -34,6 +34,10 @@ export const adminNavItems = [
     {
         name: "Users",
         link: "/admin/users"
+    },
+    {
+        name: "Scanner",
+        link: "/admin/scanner"
     }
 ];
 
