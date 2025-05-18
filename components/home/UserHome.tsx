@@ -11,19 +11,15 @@ const features = [
 const UserHome = () => {
   return (
     <div className="relative min-h-screen w-full overflow-hidden">
-    
-
-      {/* Overlay */}
       <div className="absolute inset-0 bg-black/50 z-10" />
-
-      {/* Foreground Content */}
       <div className="relative z-20 flex flex-col items-center justify-center min-h-screen px-6 text-white text-center">
         <div className="bg-black/60 p-10 rounded-xl backdrop-blur-md shadow-2xl max-w-2xl w-full space-y-8">
           <h1 className="text-4xl md:text-5xl font-extrabold leading-tight">
             Welcome to <span className="text-orange-400">Mess Management</span>
           </h1>
           <p className="text-lg md:text-xl text-gray-200">
-            Your all-in-one solution for managing daily meals, buying coupons, and tracking orders.
+            Your all-in-one solution for managing daily meals, buying coupons,
+            and tracking orders.
           </p>
 
           <Link href="/user/coupon">

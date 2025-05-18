@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { CheckCircle } from "lucide-react";
@@ -12,14 +11,7 @@ const features = [
 const AdminHome = () => {
   return (
     <div className="relative min-h-screen w-full overflow-hidden">
-      {/* Background Image */}
-      {/* <Image
-        src="/admin-homepage.jpg"
-        alt="Admin Dashboard Background"
-        fill
-        className="object-cover"
-        priority
-      /> */}
+     
 
       {/* Dark Overlay */}
       <div className="absolute inset-0 bg-black/60 z-10" />
