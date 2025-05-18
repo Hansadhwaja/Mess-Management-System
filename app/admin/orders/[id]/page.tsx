@@ -2,7 +2,13 @@ import { getOrderById } from "@/lib/actions/orderActions";
 import { Coupon } from "@/types/types";
 import React from "react";
 
-const OrderDetails = async ({ params }: { params: { id: string } }) => {
+interface PageProps {
+  params: {
+    id: string;
+  };
+}
+
+const OrderDetails = async ({ params }: PageProps) => {
   const order = await getOrderById({ id: params.id });
 
   if (!order) {
@@ -32,9 +38,7 @@ const OrderDetails = async ({ params }: { params: { id: string } }) => {
           />
         </div>
         <div>
-          <h2 className="text-2xl font-semibold mb-4 text-gray-800">
-            Coupons
-          </h2>
+          <h2 className="text-2xl font-semibold mb-4 text-gray-800">Coupons</h2>
           {order.coupons && order.coupons.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
               {order.coupons.map((coupon: Coupon) => (
@@ -77,9 +81,7 @@ const InfoItem = ({
     <span className="text-gray-500 uppercase text-xs tracking-wide">
       {label}
     </span>
-    <span className="mt-1 text-gray-900 font-medium break-words">
-      {value}
-    </span>
+    <span className="mt-1 text-gray-900 font-medium break-words">{value}</span>
   </div>
 );
 
