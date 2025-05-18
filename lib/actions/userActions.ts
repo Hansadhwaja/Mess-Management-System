@@ -15,3 +15,13 @@ export const getUser = async ({ clerkId }: { clerkId: string }) => {
     }
 
 }
+
+export const getUsers = async () => {
+    await connectDB();
+    try {
+        return await User.find();
+    } catch (error) {
+        console.error("Error fetching users:", error);
+        throw new Error("Failed to fetch users");
+    }
+}

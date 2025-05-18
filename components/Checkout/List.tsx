@@ -26,34 +26,34 @@ const CheckoutList = ({ timeOptions }: CheckoutListProps) => {
   if (selectedCoupons.length === 0) return <Loader color="black" />;
 
   return (
-    <div className="p-8 rounded-lg">
-      <div className="flex flex-wrap gap-4">
+    <div className="p-6 rounded-xl bg-white shadow-md">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {sortedCoupons.map((entry, index) => (
           <div
             key={index}
-            className="min-w-[300px] border shadow-md p-4 rounded-lg"
+            className="border border-gray-200 shadow-lg p-4 rounded-xl bg-gray-50"
           >
-            <h1 className="font-semibold underline mb-2 text-xl">
+            <h2 className="text-2xl font-bold text-orange-600 mb-3 underline">
               {entry.day}
-            </h1>
-            <div>
+            </h2>
+            <div className="space-y-2">
               {entry.meal.map((meal, mealIndex) => {
-                const mealCost = timeOptions?.find(
-                  (time) => time.meal.toLowerCase() === meal.toLowerCase()
-                )?.cost;
-                total += mealCost || 0;
+                const mealCost =
+                  timeOptions.find(
+                    (time) => time.meal.toLowerCase() === meal.toLowerCase()
+                  )?.cost || 0;
+                total += mealCost;
+
                 return (
                   <div
                     key={mealIndex}
-                    className="text-sm flex justify-between py-2"
+                    className="flex justify-between items-center"
                   >
-                    <p className="text-xl">
-                      {mealIndex + 1}.
-                      <span className="capitalize ml-2">{meal}</span>
+                    <p className="capitalize text-lg font-medium">
+                      {mealIndex + 1}. {meal}
                     </p>
-                    <p className="font-semibold text-xl">
-                      {mealCost}
-                      /-
+                    <p className="text-lg font-semibold text-gray-700">
+                      ₹{mealCost}/-
                     </p>
                   </div>
                 );
@@ -62,10 +62,11 @@ const CheckoutList = ({ timeOptions }: CheckoutListProps) => {
           </div>
         ))}
       </div>
-      <hr className="mt-8" />
-      <div className="flex gap-12 text-lg p-8 justify-center">
-        <h2 className="lg:text-xl font-semibold mb-4">Total:</h2>
-        <p className="font-semibold text-xl xl:text-2xl">₹{total}/-</p>
+
+      <hr className="my-8 border-t-2" />
+
+      <div className="flex flex-col items-center gap-4">
+        <h2 className="text-2xl font-bold text-green-700">Total: ₹{total}/-</h2>
         <PaymentButton amount={total} />
       </div>
     </div>

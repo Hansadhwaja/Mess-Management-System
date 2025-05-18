@@ -13,6 +13,15 @@ export interface MenuItem {
     dinner: Meal | null;
 }
 
+export interface EditedMenuItem {
+    _id: string;
+    day: string;
+    breakfast: string;
+    lunch: string;
+    dinner: string;
+    serialNumber: number;
+}
+
 
 export interface CouponProps {
     menuItems: MenuItem[];

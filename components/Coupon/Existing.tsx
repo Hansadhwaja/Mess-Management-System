@@ -8,12 +8,16 @@ interface ExistingOrderProps {
 
 const ExistingOrder = async ({ coupons }: ExistingOrderProps) => {
   return (
-    <div className="flex flex-col min-h-screen p-4 w-full items-center">
-      <h1 className="text-2xl font-semibold mb-4 text-center">Your Coupons</h1>
-      <div className="flex flex-col gap-4">
+    <div className="w-full flex flex-col items-center">
+      <div className="grid gap-6 w-full max-w-3xl">
         {coupons.map((coupon) => (
-          <div key={coupon._id} className="w-full flex flex-col gap-4 mt-8">
-            <h1 className="font-semibold text-2xl uppercase">{coupon.day}</h1>
+          <div
+            key={coupon._id}
+            className="rounded-xl shadow-md bg-white border border-gray-200 p-6"
+          >
+            <h2 className="text-xl font-semibold text-gray-800 uppercase mb-4 border-b pb-2">
+              {coupon.day}
+            </h2>
             <PerDayCoupon meal={coupon.meal} day={coupon.day} />
           </div>
         ))}

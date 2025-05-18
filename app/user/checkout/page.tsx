@@ -10,9 +10,13 @@ const Checkout = async () => {
   }));
 
   return (
-    <div className="flex flex-col min-h-screen p-4">
-      <h1 className="text-3xl font-bold mb-4 text-center">Checkout</h1>
-      <CheckoutList timeOptions={timeOptions} />
+    <div className="min-h-screen bg-gray-50 py-10 px-4">
+      <div className="max-w-5xl mx-auto">
+        <h1 className="text-4xl font-bold text-center text-orange-600 mb-8">
+          Checkout
+        </h1>
+        <CheckoutList timeOptions={timeOptions} />
+      </div>
     </div>
   );
 };

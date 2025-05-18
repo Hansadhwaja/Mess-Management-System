@@ -8,10 +8,16 @@ const BuyCoupon = async () => {
     ...item,
     _id: item._id.toString(),
   }));
+
   return (
-    <div className="flex flex-col min-h-screen p-4 items-center">
-      <h1 className="text-3xl font-bold mb-4">Coupon</h1>
-      <Coupon menuItems={menuItems} />
+    <div className="min-h-screen bg-gray-50 py-10 px-4">
+      <div className="max-w-5xl mx-auto">
+        <h1 className="text-4xl font-bold text-center mb-8 text-orange-600">
+          Coupons
+        </h1>
+
+        <Coupon menuItems={menuItems} />
+      </div>
     </div>
   );
 };

@@ -1,6 +1,7 @@
+import { dayOrder } from "@/constants";
 import { Coupon } from "@/types/types";
 
-const dayOrder = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+
 
 export const sortByWeekDays = (array: Coupon[]) => {
     return [...array].sort(

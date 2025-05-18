@@ -31,67 +31,81 @@ const CouponTable = ({ breakfast, lunch, dinner, day }: CouponTableProps) => {
   const isMealSelected = (meal: MealType) =>
     selectedForDay?.meal.includes(meal) ?? false;
 
+  const getRowClass = (meal: MealType) =>
+    isMealSelected(meal) ? "bg-orange-50" : "";
+
   return (
-    <Table className="w-full mt-4">
-      <TableHeader>
-        <TableRow>
-          <TableHead className="w-[50px]">
-            <Checkbox
-              className="border border-black"
-              checked={isAllSelected}
-              onCheckedChange={(checked: boolean) => {
-                toggleMealsForDay(day, checked ? allMeals : []);
-              }}
-            />
-          </TableHead>
-          <TableHead>Type</TableHead>
-          <TableHead>Time</TableHead>
-          <TableHead>Rs</TableHead>
-          <TableHead>Items</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        <TableRow>
-          <TableCell className="font-medium">
-            <Checkbox
-              className="border border-black"
-              checked={isMealSelected("breakfast")}
-              onCheckedChange={() => toggleMeal(day, "breakfast")}
-            />
-          </TableCell>
-          <TableCell>{breakfast?.type}</TableCell>
-          <TableCell>{breakfast?.time}</TableCell>
-          <TableCell className="font-semibold">{breakfast?.cost}/-</TableCell>
-          <TableCell>{breakfast?.items}</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell className="font-medium">
-            <Checkbox
-              className="border border-black"
-              checked={isMealSelected("lunch")}
-              onCheckedChange={() => toggleMeal(day, "lunch")}
-            />
-          </TableCell>
-          <TableCell>{lunch?.type}</TableCell>
-          <TableCell>{lunch?.time}</TableCell>
-          <TableCell className="font-semibold">{lunch?.cost}/-</TableCell>
-          <TableCell>{lunch?.items}</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell className="font-medium">
-            <Checkbox
-              className="border border-black"
-              checked={isMealSelected("dinner")}
-              onCheckedChange={() => toggleMeal(day, "dinner")}
-            />
-          </TableCell>
-          <TableCell>{dinner?.type}</TableCell>
-          <TableCell>{dinner?.time}</TableCell>
-          <TableCell className="font-semibold">{dinner?.cost}/-</TableCell>
-          <TableCell>{dinner?.items}</TableCell>
-        </TableRow>
-      </TableBody>
-    </Table>
+    <div className="overflow-x-auto">
+      <Table className="min-w-full mt-2 text-sm">
+        <TableHeader>
+          <TableRow className="bg-gray-100">
+            <TableHead className="w-12 text-center">
+              <Checkbox
+                className="border-gray-400"
+                checked={isAllSelected}
+                onCheckedChange={(checked: boolean) => {
+                  toggleMealsForDay(day, checked ? allMeals : []);
+                }}
+              />
+            </TableHead>
+            <TableHead className="text-gray-700">Meal</TableHead>
+            <TableHead className="text-gray-700">Time</TableHead>
+            <TableHead className="text-gray-700">Cost</TableHead>
+            <TableHead className="text-gray-700">Items</TableHead>
+          </TableRow>
+        </TableHeader>
+
+        <TableBody>
+          <TableRow className={getRowClass("breakfast")}>
+            <TableCell className="text-center">
+              <Checkbox
+                className="border-gray-400"
+                checked={isMealSelected("breakfast")}
+                onCheckedChange={() => toggleMeal(day, "breakfast")}
+              />
+            </TableCell>
+            <TableCell>{breakfast?.type || "—"}</TableCell>
+            <TableCell>{breakfast?.time || "—"}</TableCell>
+            <TableCell className="font-medium text-orange-600">
+              {breakfast?.cost ? `${breakfast.cost}/-` : "—"}
+            </TableCell>
+            <TableCell>{breakfast?.items || "—"}</TableCell>
+          </TableRow>
+
+          <TableRow className={getRowClass("lunch")}>
+            <TableCell className="text-center">
+              <Checkbox
+                className="border-gray-400"
+                checked={isMealSelected("lunch")}
+                onCheckedChange={() => toggleMeal(day, "lunch")}
+              />
+            </TableCell>
+            <TableCell>{lunch?.type || "—"}</TableCell>
+            <TableCell>{lunch?.time || "—"}</TableCell>
+            <TableCell className="font-medium text-orange-600">
+              {lunch?.cost ? `${lunch.cost}/-` : "—"}
+            </TableCell>
+            <TableCell>{lunch?.items || "—"}</TableCell>
+          </TableRow>
+
+          <TableRow className={getRowClass("dinner")}>
+            <TableCell className="text-center">
+              <Checkbox
+                className="border-gray-400"
+                checked={isMealSelected("dinner")}
+                onCheckedChange={() => toggleMeal(day, "dinner")}
+              />
+            </TableCell>
+            <TableCell>{dinner?.type || "—"}</TableCell>
+            <TableCell>{dinner?.time || "—"}</TableCell>
+            <TableCell className="font-medium text-orange-600">
+              {dinner?.cost ? `${dinner.cost}/-` : "—"}
+            </TableCell>
+            <TableCell>{dinner?.items || "—"}</TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+    </div>
   );
 };
 

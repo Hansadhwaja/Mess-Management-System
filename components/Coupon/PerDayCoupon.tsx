@@ -3,24 +3,25 @@ import { MealType, MenuItem } from "@/types/types";
 import React from "react";
 import Card from "./Card";
 
-const PerDayCoupon = async ({
-  meal,
-  day,
-}: {
+interface PerDayCouponProps {
   meal: MealType[];
   day: string;
-}) => {
-  const menu = await getMenuItems();
+}
+
+const PerDayCoupon = async ({ meal, day }: PerDayCouponProps) => {
+  const menuItems = await getMenuItems();
+  const todayMenu = menuItems.find((item: MenuItem) => item.day === day);
+
   return (
-    <div className="flex gap-8 flex-wrap items-center">
-      {meal.map((meal) => {
-        const menuItem = menu.find((item: MenuItem) => item.day === day);
+    <div className="flex flex-wrap gap-6 justify-start">
+      {meal.map((mealType) => {
+        const mealContent = todayMenu ? todayMenu[mealType] : "Not available";
         return (
           <Card
-            key={meal}
-            meal={meal}
+            key={mealType}
+            meal={mealType}
             day={day}
-            menuItem={menuItem ? menuItem[meal] : ""}
+            menuItem={mealContent}
           />
         );
       })}
