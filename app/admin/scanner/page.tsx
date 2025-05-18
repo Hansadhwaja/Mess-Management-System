@@ -34,7 +34,7 @@ const AdminScanner = () => {
       setVerificationResult(null);
       setVerifying(true);
 
-      const res = await fetch("/api/verify-coupon", {
+      const res = await fetch("/api/coupon", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),

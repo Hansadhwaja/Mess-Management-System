@@ -1,5 +1,6 @@
 import { connectDB } from "@/lib/db";
 import Coupon from "@/lib/models/couponModel";
+import { User } from "@/lib/models/userModel";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
@@ -7,7 +8,8 @@ export async function POST(request: NextRequest) {
   try {
     const { userId, week, day, meal } = await request.json();
 
-    const coupon = await Coupon.findOne({ userId, week, day, meal, used: false });
+    const dbUser = await User.findOne({ clerkId: userId });
+    const coupon = await Coupon.findOne({ userId: dbUser?._id, week, day, meal, used: false });
 
     if (!coupon) {
       return NextResponse.json({ valid: false, message: "Coupon invalid or already used" });

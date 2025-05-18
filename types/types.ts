@@ -46,13 +46,14 @@ export interface Order {
 }
 
 export interface CouponMeal {
-  id: string;
-  meal: MealType;
-  used: boolean;
-  usedAt?: string;
+    id: string;
+    meal: MealType;
+    used: boolean;
+    usedAt?: string;
 }
 
-export interface GroupedCoupon{
-    day:string;
-    meals:string[];
+export interface GroupedCoupon {
+    day: string;
+    meals: string[];
 }
+
