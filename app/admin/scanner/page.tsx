@@ -1,42 +1,57 @@
 "use client";
 
+import React, { useEffect, useState } from "react";
 import { Scanner, IDetectedBarcode } from "@yudiel/react-qr-scanner";
-import React, { useState } from "react";
 
-type CouponData = {
-  userId: string;
-  week: number;
-  day: string;
-  meal: string;
-};
+const isMobile = () => /Mobi|Android/i.test(navigator.userAgent);
 
-type QrDataType = CouponData | string;
+const AdminScanner = () => {
+  const [constraints, setConstraints] = useState({ facingMode: "user" });
+  const [scanResult, setScanResult] = useState<string | null>(null);
+  const [couponData, setCouponData] = useState(null);
+  const [verifying, setVerifying] = useState(false);
+  const [verificationResult, setVerificationResult] = useState<
+    "valid" | "invalid" | null
+  >(null);
 
-const AdminScanner: React.FC = () => {
-  const [qrData, setQrData] = useState<QrDataType | null>(null);
+  useEffect(() => {
+    if (isMobile()) {
+      setConstraints({ facingMode: "environment" });
+    }
+  }, []);
 
-  const handleScan = (codes: IDetectedBarcode[]) => {
-    if (!codes || codes.length === 0) return;
+  const handleScan = async (detectedCodes: IDetectedBarcode[]) => {
+    if (detectedCodes.length === 0) return;
 
-    const text = codes[0]?.rawValue;
-    if (!text) return;
+    const code = detectedCodes[0].rawValue;
+
+    if (!code) return;
 
     try {
-      const parsed = JSON.parse(text);
-      if (
-        typeof parsed === "object" &&
-        parsed !== null &&
-        "userId" in parsed &&
-        "week" in parsed &&
-        "day" in parsed &&
-        "meal" in parsed
-      ) {
-        setQrData(parsed as CouponData);
-      } else {
-        setQrData("QR code does not contain valid coupon data.");
-      }
-    } catch {
-      setQrData("Invalid QR content: " + text);
+      const data = JSON.parse(code);
+      setCouponData(data);
+      setScanResult(null);
+      setVerificationResult(null);
+      setVerifying(true);
+
+      const res = await fetch("/api/verify-coupon", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      if (!res.ok) throw new Error("Network response was not ok");
+
+      const json = await res.json();
+
+      setVerificationResult(json.valid ? "valid" : "invalid");
+    } catch (error) {
+      console.log(error);
+      setScanResult("Invalid QR content or verification failed.");
+      setCouponData(null);
+      setVerificationResult(null);
+    } finally {
+      setVerifying(false);
     }
   };
 
@@ -52,21 +67,41 @@ const AdminScanner: React.FC = () => {
         <Scanner
           onScan={handleScan}
           onError={handleError}
-          constraints={{
-            facingMode: "environment",
-          }}
+          constraints={constraints}
         />
       </div>
 
-      {qrData && (
-        <div className="mt-6 p-4 bg-gray-100 rounded-lg shadow text-sm max-w-md mx-auto">
+      {verifying && (
+        <p className="mt-4 text-center text-blue-600 font-semibold">
+          Verifying...
+        </p>
+      )}
+
+      {scanResult && (
+        <p className="mt-4 text-center text-red-600 font-semibold">
+          {scanResult}
+        </p>
+      )}
+
+      {couponData && (
+        <div className="mt-6 p-4 bg-gray-100 rounded-lg shadow max-w-md mx-auto">
           <h3 className="font-semibold mb-2">QR Code Data:</h3>
           <pre className="whitespace-pre-wrap break-words">
-            {typeof qrData === "string"
-              ? qrData
-              : JSON.stringify(qrData, null, 2)}
+            {JSON.stringify(couponData, null, 2)}
           </pre>
         </div>
+      )}
+
+      {verificationResult === "valid" && (
+        <p className="mt-4 text-center text-green-600 font-bold">
+          Coupon is <span className="underline">VALID</span>
+        </p>
+      )}
+
+      {verificationResult === "invalid" && (
+        <p className="mt-4 text-center text-red-600 font-bold">
+          Coupon is <span className="underline">INVALID</span>
+        </p>
       )}
     </div>
   );

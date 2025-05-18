@@ -44,3 +44,15 @@ export interface Order {
     createdAt: string;
     updatedAt: string;
 }
+
+export interface CouponMeal {
+  id: string;
+  meal: MealType;
+  used: boolean;
+  usedAt?: string;
+}
+
+export interface GroupedCoupon{
+    day:string;
+    meals:string[];
+}

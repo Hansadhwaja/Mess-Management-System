@@ -13,19 +13,7 @@ const orderSchema = new mongoose.Schema({
   amount: {
     type: Number,
     required: true,
-  },
-  coupons: [
-    {
-      day: {
-        type: String,
-        required: true,
-      },
-      meal: {
-        type: [String],
-        required: true,
-      },
-    },
-  ],
+  }
 }, { timestamps: true, versionKey: false });
 const Order = mongoose.models.Order || mongoose.model("Order", orderSchema);
 export default Order;

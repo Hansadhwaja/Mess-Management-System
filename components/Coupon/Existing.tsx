@@ -1,24 +1,26 @@
-import { Coupon } from "@/types/types";
 import React from "react";
 import PerDayCoupon from "./PerDayCoupon";
-
+import { CouponMeal } from "@/types/types";
 interface ExistingOrderProps {
-  coupons: Coupon[];
+  coupons: {
+    day: string;
+    meals: CouponMeal[];
+  }[];
 }
 
 const ExistingOrder = async ({ coupons }: ExistingOrderProps) => {
   return (
     <div className="w-full flex flex-col items-center">
       <div className="grid gap-6 w-full max-w-3xl">
-        {coupons.map((coupon) => (
+        {coupons.map((couponDay) => (
           <div
-            key={coupon._id}
+            key={couponDay.day}
             className="rounded-xl shadow-md bg-white border border-gray-200 p-6"
           >
             <h2 className="text-xl font-semibold text-gray-800 uppercase mb-4 border-b pb-2">
-              {coupon.day}
+              {couponDay.day}
             </h2>
-            <PerDayCoupon meal={coupon.meal} day={coupon.day} />
+            <PerDayCoupon meals={couponDay.meals} day={couponDay.day} />
           </div>
         ))}
       </div>

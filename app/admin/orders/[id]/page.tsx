@@ -1,13 +1,13 @@
 import InfoItem from "@/components/admin/Orders/InfoItem";
 import { getOrderById } from "@/lib/actions/orderActions";
-import { Coupon } from "@/types/types";
+import { GroupedCoupon } from "@/types/types";
 import React from "react";
 
 type Params = Promise<{ id: string }>;
 
 const OrderDetails = async (props: { params: Params }) => {
   const params = await props.params;
-  const order = await getOrderById({ id: params.id });
+  const { order, coupons } = await getOrderById({ id: params.id });
 
   if (!order) {
     return (
@@ -37,18 +37,18 @@ const OrderDetails = async (props: { params: Params }) => {
         </div>
         <div>
           <h2 className="text-2xl font-semibold mb-4 text-gray-800">Coupons</h2>
-          {order.coupons && order.coupons.length > 0 ? (
+          {coupons && coupons.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-              {order.coupons.map((coupon: Coupon) => (
+              {coupons.map((coupon: GroupedCoupon) => (
                 <div
-                  key={coupon._id}
+                  key={coupon.day}
                   className="bg-gray-100 rounded-lg p-5 border border-gray-300 shadow-sm hover:shadow-md transition-shadow"
                 >
                   <p className="text-lg font-semibold text-gray-900 mb-2">
                     {coupon.day}
                   </p>
                   <ul className="list-disc list-inside text-gray-700 space-y-1">
-                    {coupon.meal.map((meal: string, idx: number) => (
+                    {coupon.meals.map((meal: string, idx: number) => (
                       <li key={idx} className="capitalize">
                         {meal}
                       </li>

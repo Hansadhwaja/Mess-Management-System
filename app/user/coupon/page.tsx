@@ -1,12 +1,11 @@
 import BuyCoupon from "@/components/Coupon/Buy";
 import ExistingOrder from "@/components/Coupon/Existing";
 import { getOrder } from "@/lib/actions/orderActions";
-import { Order } from "@/types/types";
 import React from "react";
 
 const CouponPage = async () => {
-  const order: Order | null = await getOrder();
-  const orderExists = order && order.coupons.length > 0;
+  const { coupons } = await getOrder();
+  const orderExists = coupons && coupons.length > 0;
 
   return (
     <div className="min-h-screen py-10 px-4 flex items-center justify-center">
@@ -15,11 +14,7 @@ const CouponPage = async () => {
           {orderExists ? "Your Purchased Coupons" : "Buy Your Meal Coupon"}
         </h1>
 
-        {orderExists ? (
-          <ExistingOrder coupons={order.coupons} />
-        ) : (
-          <BuyCoupon />
-        )}
+        {orderExists ? <ExistingOrder coupons={coupons} /> : <BuyCoupon />}
       </div>
     </div>
   );
