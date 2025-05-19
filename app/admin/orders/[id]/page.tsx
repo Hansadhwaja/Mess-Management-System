@@ -1,7 +1,11 @@
 import InfoItem from "@/components/admin/Orders/InfoItem";
 import { getOrderById } from "@/lib/actions/orderActions";
-import { GroupedCoupon } from "@/types/types";
 import React from "react";
+
+interface OrderCoupon{
+day:string;
+meals:string[]
+}
 
 type Params = Promise<{ id: string }>;
 
@@ -38,12 +42,12 @@ const OrderDetails = async (props: { params: Params }) => {
 
         <div>
           <h2 className="text-2xl font-semibold text-white mb-4">
-            Coupons Used
+            Coupons
           </h2>
 
           {coupons && coupons.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-              {coupons.map((coupon: GroupedCoupon) => (
+              {coupons.map((coupon: OrderCoupon) => (
                 <div
                   key={coupon.day}
                   className="bg-white/10 text-white p-5 rounded-lg border border-white/20 shadow-sm hover:shadow-md transition"
