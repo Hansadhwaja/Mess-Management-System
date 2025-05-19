@@ -13,7 +13,7 @@ const PerDayCoupon = async ({ meals, day }: PerDayCouponProps) => {
   const todayMenu = menuItems.find((item: MenuItem) => item.day === day);
 
   return (
-    <div className="flex flex-wrap gap-6 justify-start">
+    <div className="flex flex-wrap gap-6 justify-center sm:justify-start">
       {meals.map((mealType: CouponMeal) => {
         const mealContent = todayMenu ? todayMenu[mealType.meal] : null;
         const menuItemDescription = mealContent ? mealContent : "Not available";

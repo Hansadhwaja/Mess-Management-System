@@ -8,13 +8,13 @@ import {
 } from "@/components/ui/tooltip";
 import { SquarePen } from "lucide-react";
 
-const EditButton = () => {
+const EditButton = ({ type = "menu" }: { type?: string }) => {
   return (
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger asChild>
           <Link
-            href="/admin/menu/edit"
+            href={type === "menu" ? "/admin/menu/edit" : "/admin/menu/time"}
             className="
               inline-flex items-center justify-center
               rounded-md border border-indigo-200
@@ -25,12 +25,14 @@ const EditButton = () => {
             aria-label="Edit Menu"
           >
             <SquarePen className="w-5 h-5 mr-2" />
-            <span className="hidden sm:flex">Edit Menu</span>
+            <span className="hidden sm:flex">
+              {type === "menu" ? "Edit Menu" : "Edit Menu Timing"}
+            </span>
           </Link>
         </TooltipTrigger>
 
         <TooltipContent className="bg-gray-900 text-white rounded-md px-3 py-1 text-sm shadow-lg">
-          Edit today&apos;s menu
+          {type === "menu" ? "Edit Menu" : "Edit Menu Timing"}
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>

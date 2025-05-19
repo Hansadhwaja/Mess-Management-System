@@ -53,3 +53,4 @@ export const adminNavItems = [
 
 export const dayOrder = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
+export const meals=["Breakfast","Lunch","Dinner"];

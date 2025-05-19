@@ -16,12 +16,14 @@ import { Trash2 } from "lucide-react";
 import { deleteAllMenus } from "@/lib/actions/menuActions";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { deleteAllTimings } from "@/lib/actions/timeActions";
 
-const DeleteButton = () => {
+const DeleteButton = ({ type = "menu" }: { type?: string }) => {
   const router = useRouter();
 
   const handleDelete = async () => {
-    const response = await deleteAllMenus();
+    const response =
+      type === "menu" ? await deleteAllMenus() : await deleteAllTimings();
     if (response.status === 200) {
       toast.success(response.message);
       router.refresh();
@@ -51,8 +53,9 @@ const DeleteButton = () => {
             <span className="font-semibold text-red-500">
               cannot be undone.
             </span>
-            It will permanently delete all menus. Students will no longer see
-            today&apos;s meal.
+            It will permanently delete all{" "}
+            {type === "menu" ? "menus" : "menu timing"}. Students will no longer
+            see weekly meal {type === "time" && " timing"}.
           </AlertDialogDescription>
         </AlertDialogHeader>
 

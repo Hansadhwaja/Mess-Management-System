@@ -54,6 +54,13 @@ export interface CouponMeal {
 
 export interface GroupedCoupon {
     day: string;
-    meals: string[];
+    meals: CouponMeal[];
+}
+
+export interface Time {
+    _id: string;
+    meal: string;
+    time: string;
+    cost: number;
 }
 

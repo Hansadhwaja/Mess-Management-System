@@ -1,3 +1,6 @@
+
+'use server';
+
 import { connectDB } from "../db";
 import { Menu } from "../models/menuModel";
 import { Time } from "../models/timeModel";

@@ -75,12 +75,12 @@ const WeeklyMenuForm = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto bg-white p-8 rounded-2xl shadow-lg border border-gray-200">
+    <div className="max-w-md mx-auto p-8 rounded-2xl shadow-lg border border-gray-200">
       <div className="mb-8 text-center">
-        <h2 className="text-xl sm:text-3xl font-semibold text-gray-900">
+        <h2 className="text-xl sm:text-3xl font-semibold text-gray-100">
           Weekly Meal Planner
         </h2>
-        <p className="mt-2 text-gray-600 text-sm sm:text-base">
+        <p className="mt-2 text-gray-200 text-sm sm:text-base">
           Plan your meals for {currentDay.toLowerCase()}
         </p>
       </div>
@@ -90,7 +90,7 @@ const WeeklyMenuForm = () => {
           <div key={meal} className="flex flex-col">
             <Label
               htmlFor={meal}
-              className="mb-1 text-gray-700 font-medium capitalize"
+              className="mb-1 text-gray-100 font-medium capitalize"
             >
               {meal}
             </Label>
@@ -104,7 +104,7 @@ const WeeklyMenuForm = () => {
                   ? "e.g. Rice and Dal"
                   : "e.g. Roti and Sabzi"
               }
-              className={`border-gray-300 focus:border-indigo-500 focus:ring-indigo-400 ${
+              className={`border-gray-300 focus:border-indigo-500 focus:ring-indigo-400 text-white $ {
                 errors[meal as keyof MenuFormData]
                   ? "border-red-500 focus:ring-red-400"
                   : ""
@@ -140,7 +140,7 @@ const WeeklyMenuForm = () => {
           <Button
             type="submit"
             disabled={isSubmitting}
-            className="px-6 py-2 rounded-md"
+            className="px-6 py-2 rounded-md bg-transparent border hover:bg-black/50"
           >
             {currentDayIndex === dayOrder.length - 1 ? "Finish" : "Next"}
           </Button>
