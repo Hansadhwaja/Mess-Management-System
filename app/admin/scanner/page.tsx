@@ -64,9 +64,9 @@ const AdminScanner = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 py-10 px-4 flex flex-col items-center">
-      <div className="bg-white shadow-xl rounded-2xl p-6 w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-4 text-center text-gray-800">
+    <div className="bg-black/50 backdrop-blur-2xl m-4 rounded-xl py-10 px-4 flex flex-col items-center">
+      <div className="shadow-xl rounded-2xl p-6 w-full max-w-md">
+        <h2 className="text-2xl font-bold mb-4 text-center text-gray-100">
           Verify Coupon
         </h2>
 
@@ -91,9 +91,9 @@ const AdminScanner = () => {
         )}
 
         {couponData && (
-          <div className="mt-6 bg-gray-50 p-4 rounded-lg shadow-inner border text-sm">
-            <h3 className="font-semibold mb-2 text-gray-700">QR Code Data:</h3>
-            <pre className="whitespace-pre-wrap break-words text-gray-600">
+          <div className="mt-6 p-4 rounded-lg shadow-inner border text-sm">
+            <h3 className="font-semibold mb-2 text-gray-200">QR Code Data:</h3>
+            <pre className="whitespace-pre-wrap break-words text-gray-100">
               {JSON.stringify(couponData, null, 2)}
             </pre>
           </div>

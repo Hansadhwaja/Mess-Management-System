@@ -5,16 +5,20 @@ import React from "react";
 
 const CouponPage = async () => {
   const { coupons } = await getOrder();
-  const orderExists = coupons && coupons.length > 0;
+  const orderExists = coupons?.length > 0;
 
   return (
-    <div className="min-h-screen py-10 px-4 flex items-center justify-center">
-      <div className="w-full max-w-3xl bg-white shadow-lg rounded-xl p-6 md:p-10">
-        <h1 className="text-3xl font-bold text-center text-orange-600 mb-6">
+    <div className="min-h-[80vh] py-10 px-4 flex items-center justify-center">
+      <div className="w-full max-w-3xl rounded-xl bg-black/50 backdrop-blur-2xl shadow-2xl p-6 md:p-10 border border-white/10">
+        <h1 className="text-3xl md:text-4xl font-bold text-center text-orange-500 mb-8 tracking-wide">
           {orderExists ? "Your Purchased Coupons" : "Buy Your Meal Coupon"}
         </h1>
 
-        {orderExists ? <ExistingOrder coupons={coupons} /> : <BuyCoupon />}
+        {orderExists ? (
+          <ExistingOrder coupons={coupons} />
+        ) : (
+          <BuyCoupon />
+        )}
       </div>
     </div>
   );

@@ -10,8 +10,8 @@ const Checkout = async () => {
   }));
 
   return (
-    <div className="min-h-screen py-10 px-4">
-      <div className="max-w-5xl mx-auto bg-white p-4 rounded-2xl shadow-xl">
+    <div className="py-10 px-4">
+      <div className="max-w-5xl mx-auto bg-black/50 backdrop-blur-2xl p-4 rounded-2xl shadow-xl">
         <h1 className="text-4xl font-bold text-center text-orange-600 mb-8">
           Checkout
         </h1>

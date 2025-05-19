@@ -11,20 +11,20 @@ const OrderDetails = async (props: { params: Params }) => {
 
   if (!order) {
     return (
-      <div className="flex items-center justify-center min-h-screen text-gray-500 text-lg">
+      <div className="flex items-center justify-center text-gray-400 text-lg py-20">
         Order not found.
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-8">
-      <h1 className="text-4xl font-extrabold mb-8 text-center text-gray-900">
+    <div className="bg-black/50 backdrop-blur-2xl m-4 rounded-xl p-6 sm:p-10">
+      <h1 className="text-3xl sm:text-4xl font-extrabold mb-8 text-center text-white">
         Order Details
       </h1>
 
-      <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg p-8 border border-gray-200">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-6 gap-x-12 mb-8">
+      <div className="max-w-5xl mx-auto rounded-2xl shadow-lg p-6 sm:p-10 border border-white/20 bg-white/5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-6 gap-x-12 mb-10">
           <InfoItem label="Order ID" value={order._id.toString()} />
           <InfoItem label="User Name" value={order.userId.name} />
           <InfoItem label="Week" value={order.week} />
@@ -35,19 +35,21 @@ const OrderDetails = async (props: { params: Params }) => {
             className="sm:col-span-2"
           />
         </div>
+
         <div>
-          <h2 className="text-2xl font-semibold mb-4 text-gray-800">Coupons</h2>
+          <h2 className="text-2xl font-semibold text-white mb-4">
+            Coupons Used
+          </h2>
+
           {coupons && coupons.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
               {coupons.map((coupon: GroupedCoupon) => (
                 <div
                   key={coupon.day}
-                  className="bg-gray-100 rounded-lg p-5 border border-gray-300 shadow-sm hover:shadow-md transition-shadow"
+                  className="bg-white/10 text-white p-5 rounded-lg border border-white/20 shadow-sm hover:shadow-md transition"
                 >
-                  <p className="text-lg font-semibold text-gray-900 mb-2">
-                    {coupon.day}
-                  </p>
-                  <ul className="list-disc list-inside text-gray-700 space-y-1">
+                  <p className="text-lg font-bold mb-2">{coupon.day}</p>
+                  <ul className="list-disc list-inside space-y-1 text-gray-300">
                     {coupon.meals.map((meal: string, idx: number) => (
                       <li key={idx} className="capitalize">
                         {meal}
@@ -58,7 +60,7 @@ const OrderDetails = async (props: { params: Params }) => {
               ))}
             </div>
           ) : (
-            <p className="text-gray-500 italic">No coupons used</p>
+            <p className="text-gray-400 italic">No coupons used for this order.</p>
           )}
         </div>
       </div>

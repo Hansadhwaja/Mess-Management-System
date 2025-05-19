@@ -25,30 +25,29 @@ const Coupon = ({ menuItems }: CouponProps) => {
   }, 0);
 
   return (
-    <div className="flex flex-col items-center px-4 pb-24">
+    <div className="flex flex-col items-center sm:px-4 pb-32">
       {menuItems.map((item) => (
         <div
           key={item._id}
-          className="w-full max-w-4xl bg-white border border-gray-200 rounded-2xl shadow-sm p-6 mb-6"
+          className="w-full max-w-4xl rounded-2xl border shadow-md py-6 sm:p-6 mb-6"
         >
-          <h2 className="text-2xl font-bold text-center text-gray-800 mb-4 underline decoration-orange-500">
+          <h2 className="text-2xl font-bold text-center text-white mb-4 underline decoration-orange-500">
             {item.day}
           </h2>
           <CouponTable
-            {...{
-              breakfast: item.breakfast,
-              lunch: item.lunch,
-              dinner: item.dinner,
-              day: item.day,
-            }}
+            breakfast={item.breakfast}
+            lunch={item.lunch}
+            dinner={item.dinner}
+            day={item.day}
           />
         </div>
       ))}
 
-      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg p-4 z-50">
-        <div className="max-w-4xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
-          <h3 className="text-xl font-bold text-gray-800">
-            Total Cost: <span className="text-orange-600">{calculateTotalCost}/-</span>
+      <div className="sticky bottom-0 left-0 right-0 border-2 bg-black/50 backdrop-blur-lg border-white/10 shadow-xl p-2 sm:p-4 z-50 w-full rounded-xl">
+        <div className="max-w-4xl mx-auto flex flex-wrap justify-between items-center gap-4">
+          <h3 className="sm:text-xl font-bold text-white">
+            Total Cost:{" "}
+            <span className="text-orange-500">{calculateTotalCost}/-</span>
           </h3>
           <Link href="/user/checkout">
             <Button className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-xl transition-all duration-200">

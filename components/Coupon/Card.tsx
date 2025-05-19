@@ -16,46 +16,47 @@ const Card = ({
   day: string;
   menuItem: string;
   used?: boolean;
-  usedAt?: string | undefined;
+  usedAt?: string;
 }) => {
   const router = useRouter();
 
   const handleClick = () => {
-    router.push(`qr-code?day=${day}&meal=${meal}`);
+    if (!used) {
+      router.push(`qr-code?day=${day}&meal=${meal}`);
+    }
   };
 
   return (
     <div
-      onClick={!used ? handleClick : undefined}
-      className={`group relative w-72 rounded-2xl p-6 text-white shadow-xl cursor-pointer transition-transform ${
+      onClick={handleClick}
+      className={`group relative w-72 rounded-2xl p-6 shadow-xl transition-transform ${
         used
-          ? "bg-gray-400 cursor-not-allowed"
-          : "bg-gradient-to-br from-orange-500 to-orange-400 hover:scale-105 hover:shadow-2xl"
+          ? "bg-gray-300/10 border border-gray-500 cursor-not-allowed text-white/60"
+          : "border border-white/20 text-white cursor-pointer hover:scale-105 hover:shadow-2xl"
       }`}
     >
-      <div className="absolute top-4 right-4 text-white/70">
-        <Utensils className="w-6 h-6" />
+      <div className="absolute top-4 right-4">
+        <Utensils className="w-6 h-6 text-white/70" />
       </div>
 
-      <h2 className="text-2xl font-bold capitalize mb-2">
-        {meal}{" "}
+      <h2 className="text-2xl font-bold capitalize mb-2 flex items-center gap-2">
+        {meal}
         {used && (
-          <div className="ml-2 flex flex-col text-xs text-white/90">
-            <span className="bg-red-600 px-2 py-0.5 rounded-full w-fit">
-              Used
-            </span>
-            {usedAt && (
-              <span className="mt-1">
-                at{" "}
-                {new Date(usedAt).toLocaleTimeString([], {
-                  hour: "2-digit",
-                  minute: "2-digit",
-                })}
-              </span>
-            )}
-          </div>
+          <span className="bg-red-600 px-2 py-0.5 rounded-full text-xs">
+            Used
+          </span>
         )}
       </h2>
+
+      {usedAt && used && (
+        <div className="text-xs text-white/70 mb-2">
+          at{" "}
+          {new Date(usedAt).toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+          })}
+        </div>
+      )}
 
       <p className="text-lg font-medium line-clamp-2 opacity-90">
         {menuItem || "No menu added yet."}

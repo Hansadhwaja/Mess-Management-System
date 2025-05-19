@@ -10,12 +10,8 @@ const BuyCoupon = async () => {
   }));
 
   return (
-    <div className="min-h-screen bg-gray-50 py-10 px-4">
+    <div className="py-10 sm:px-4">
       <div className="max-w-5xl mx-auto">
-        <h1 className="text-4xl font-bold text-center mb-8 text-orange-600">
-          Coupons
-        </h1>
-
         <Coupon menuItems={menuItems} />
       </div>
     </div>

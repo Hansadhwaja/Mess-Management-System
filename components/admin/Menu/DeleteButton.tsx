@@ -38,17 +38,21 @@ const DeleteButton = () => {
         aria-label="Delete Menu"
       >
         <Trash2 className="w-5 h-5" />
-        Delete All
+        <span className="hidden sm:flex">Delete All</span>
       </AlertDialogTrigger>
 
-      <AlertDialogContent className="max-w-sm rounded-lg bg-white shadow-2xl border border-gray-200 p-6">
+      <AlertDialogContent className="max-w-sm rounded-lg bg-black/10 backdrop-blur-2xl shadow-2xl border border-gray-200 p-6">
         <AlertDialogHeader>
-          <AlertDialogTitle className="text-2xl font-bold text-red-700">
+          <AlertDialogTitle className="text-2xl font-bold text-red-500">
             Confirm Permanent Deletion
           </AlertDialogTitle>
-          <AlertDialogDescription className="mt-3 text-gray-700 text-base leading-relaxed">
-            This action <span className="font-semibold text-red-600">cannot be undone.</span> 
-            It will permanently delete all menus. Students will no longer see today’s meal.
+          <AlertDialogDescription className="mt-3 text-gray-100 text-base leading-relaxed">
+            This action{" "}
+            <span className="font-semibold text-red-500">
+              cannot be undone.
+            </span>
+            It will permanently delete all menus. Students will no longer see
+            today&apos;s meal.
           </AlertDialogDescription>
         </AlertDialogHeader>
 

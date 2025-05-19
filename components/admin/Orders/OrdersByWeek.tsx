@@ -17,83 +17,77 @@ const OrdersByWeek = async () => {
   const orders = await getOrdersForWeek(week);
 
   return (
-    <div className="min-h-screen flex justify-center items-start bg-gray-50 p-10">
-      <div className="w-full max-w-7xl bg-white rounded-lg shadow-md p-8">
-        <h2 className="text-3xl font-bold text-gray-900 mb-8 border-b border-gray-200 pb-3">
-          Orders for <span className="text-gray-600">{week}</span>
+    <div className="flex justify-center items-start py-4">
+      <div className="w-full max-w-7xl p-6 md:p-10">
+        <h2 className="text-2xl sm:text-3xl font-bold text-white mb-8 border-b border-white/20 pb-4">
+          Orders for <span className="text-blue-400">{week}</span>
         </h2>
 
-        <Table
-          className="text-base"
-          style={{ borderCollapse: "separate", borderSpacing: "0 14px" }}
-        >
-          <TableHeader>
-            <TableRow className="bg-gray-100 rounded-lg shadow-inner">
-              <TableHead className="w-[80px] text-left text-gray-700 rounded-l-lg px-4 py-3 font-semibold">
-                Image
-              </TableHead>
-              <TableHead className="text-left text-gray-700 font-semibold px-4 py-3">
-                Name
-              </TableHead>
-              <TableHead className="text-left text-gray-700 font-semibold px-4 py-3">
-                Email
-              </TableHead>
-              <TableHead className="text-left text-gray-700 font-semibold px-4 py-3">
-                Amount (₹)
-              </TableHead>
-              <TableHead className="text-left text-gray-700 rounded-r-lg font-semibold px-4 py-3">
-                View Details
-              </TableHead>
-            </TableRow>
-          </TableHeader>
-
-          <TableBody>
-            {orders.length === 0 ? (
-              <TableRow>
-                <TableCell
-                  colSpan={5}
-                  className="text-center py-10 text-gray-500 italic"
-                >
-                  No orders found for this week.
-                </TableCell>
+        <div className="overflow-x-auto">
+          <Table
+            className="text-sm sm:text-base w-full"
+            style={{ borderCollapse: "separate", borderSpacing: "0 12px" }}
+          >
+            <TableHeader>
+              <TableRow className="bg-white/10">
+                <TableHead className="rounded-l-xl px-4 py-3 text-white">Image</TableHead>
+                <TableHead className="px-4 py-3 text-white">Name</TableHead>
+                <TableHead className="px-4 py-3 text-white">Email</TableHead>
+                <TableHead className="px-4 py-3 text-white">Amount (₹)</TableHead>
+                <TableHead className="rounded-r-xl px-4 py-3 text-white">
+                  View Details
+                </TableHead>
               </TableRow>
-            ) : (
-              orders.map((order) => (
-                <TableRow
-                  key={order._id}
-                  className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200"
-                >
-                  <TableCell className="px-4 py-3">
-                    <Image
-                      src={order.userId.image}
-                      alt={`${order.userId.name} profile`}
-                      width={40}
-                      height={40}
-                      className="rounded-full object-cover border border-gray-300"
-                    />
-                  </TableCell>
-                  <TableCell className="px-4 py-3 font-medium text-gray-900">
-                    {order.userId.name}
-                  </TableCell>
-                  <TableCell className="px-4 py-3 text-gray-700 truncate max-w-[220px]">
-                    {order.userId.email}
-                  </TableCell>
-                  <TableCell className="px-4 py-3 font-semibold text-gray-900">
-                    ₹{order.amount}/-
-                  </TableCell>
-                  <TableCell className="px-4 py-3">
-                    <Link
-                      href={`/admin/orders/${order._id}`}
-                      className="text-blue-600 hover:text-blue-800 font-medium underline"
-                    >
-                      View Details
-                    </Link>
+            </TableHeader>
+
+            <TableBody>
+              {orders.length === 0 ? (
+                <TableRow>
+                  <TableCell
+                    colSpan={5}
+                    className="text-center py-10 text-gray-300 italic"
+                  >
+                    No orders found for this week.
                   </TableCell>
                 </TableRow>
-              ))
-            )}
-          </TableBody>
-        </Table>
+              ) : (
+                orders.map((order) => (
+                  <TableRow
+                    key={order._id}
+                    className="bg-white/5 hover:bg-white/10 backdrop-blur-md rounded-lg transition duration-200"
+                  >
+                    <TableCell className="px-4 py-3">
+                      <Image
+                        src={order.userId.image}
+                        alt={`${order.userId.name} profile`}
+                        width={40}
+                        height={40}
+                        className="rounded-full object-cover border border-gray-400"
+                      />
+                    </TableCell>
+                    <TableCell className="px-4 py-3 text-white font-medium">
+                      {order.userId.name}
+                    </TableCell>
+                    <TableCell className="px-4 py-3 text-gray-300 truncate max-w-[220px]">
+                      {order.userId.email}
+                    </TableCell>
+                    <TableCell className="px-4 py-3 text-white font-semibold">
+                      ₹{order.amount}/-
+                    </TableCell>
+                    <TableCell className="px-4 py-3">
+                      <Link
+                        href={`/admin/orders/${order._id}`}
+                        className="text-blue-400 hover:text-blue-600 underline"
+                      >
+                        View Details
+                      </Link>
+                    </TableCell>
+                  </TableRow>
+                ))
+              )}
+            </TableBody>
+          </Table>
+        </div>
       </div>
     </div>
   );

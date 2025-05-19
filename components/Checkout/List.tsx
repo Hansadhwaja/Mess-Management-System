@@ -26,12 +26,12 @@ const CheckoutList = ({ timeOptions }: CheckoutListProps) => {
   if (selectedCoupons.length === 0) return <Loader color="black" />;
 
   return (
-    <div className="p-6 rounded-xl bg-white shadow-md">
+    <div className="p-6 rounded-xl border shadow-md">
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {sortedCoupons.map((entry, index) => (
           <div
             key={index}
-            className="border border-gray-200 shadow-lg p-4 rounded-xl bg-gray-50"
+            className="border border-gray-200 shadow-lg p-4 rounded-xl"
           >
             <h2 className="text-2xl font-bold text-orange-600 mb-3 underline">
               {entry.day}
@@ -49,10 +49,10 @@ const CheckoutList = ({ timeOptions }: CheckoutListProps) => {
                     key={mealIndex}
                     className="flex justify-between items-center"
                   >
-                    <p className="capitalize text-lg font-medium">
+                    <p className="capitalize text-lg font-medium text-white">
                       {mealIndex + 1}. {meal}
                     </p>
-                    <p className="text-lg font-semibold text-gray-700">
+                    <p className="text-lg font-semibold text-gray-100">
                       ₹{mealCost}/-
                     </p>
                   </div>

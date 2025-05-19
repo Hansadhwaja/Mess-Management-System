@@ -19,11 +19,9 @@ interface CouponTableProps {
 }
 
 const CouponTable = ({ breakfast, lunch, dinner, day }: CouponTableProps) => {
-  const { selectedCoupons, toggleMeal, toggleMealsForDay } =
-    useCouponStore();
+  const { selectedCoupons, toggleMeal, toggleMealsForDay } = useCouponStore();
 
   const allMeals: MealType[] = ["breakfast", "lunch", "dinner"];
-
   const selectedForDay = selectedCoupons.find((entry) => entry.day === day);
   const isAllSelected = selectedForDay
     ? allMeals.every((meal) => selectedForDay.meal.includes(meal))
@@ -33,77 +31,50 @@ const CouponTable = ({ breakfast, lunch, dinner, day }: CouponTableProps) => {
     selectedForDay?.meal.includes(meal) ?? false;
 
   const getRowClass = (meal: MealType) =>
-    isMealSelected(meal) ? "bg-orange-50" : "";
+    isMealSelected(meal) ? "bg-orange-100/20" : "hover:bg-white/5";
 
   return (
     <div className="overflow-x-auto">
-      <Table className="min-w-full mt-2 text-sm">
+      <Table className="min-w-full text-sm">
         <TableHeader>
-          <TableRow className="bg-gray-100">
+          <TableRow className="bg-white/10 text-white">
             <TableHead className="w-12 text-center">
               <Checkbox
-                className="border-gray-400"
+                className="border-white"
                 checked={isAllSelected}
                 onCheckedChange={(checked: boolean) => {
                   toggleMealsForDay(day, checked ? allMeals : []);
                 }}
               />
             </TableHead>
-            <TableHead className="text-gray-700">Meal</TableHead>
-            <TableHead className="text-gray-700">Time</TableHead>
-            <TableHead className="text-gray-700">Cost</TableHead>
-            <TableHead className="text-gray-700">Items</TableHead>
+            <TableHead className="text-white">Meal</TableHead>
+            <TableHead className="text-white">Time</TableHead>
+            <TableHead className="text-white">Cost</TableHead>
+            <TableHead className="text-white">Items</TableHead>
           </TableRow>
         </TableHeader>
 
         <TableBody>
-          <TableRow className={getRowClass("breakfast")}>
-            <TableCell className="text-center">
-              <Checkbox
-                className="border-gray-400"
-                checked={isMealSelected("breakfast")}
-                onCheckedChange={() => toggleMeal(day, "breakfast")}
-              />
-            </TableCell>
-            <TableCell>{breakfast?.type || "—"}</TableCell>
-            <TableCell>{breakfast?.time || "—"}</TableCell>
-            <TableCell className="font-medium text-orange-600">
-              {breakfast?.cost ? `${breakfast.cost}/-` : "—"}
-            </TableCell>
-            <TableCell>{breakfast?.items || "—"}</TableCell>
-          </TableRow>
-
-          <TableRow className={getRowClass("lunch")}>
-            <TableCell className="text-center">
-              <Checkbox
-                className="border-gray-400"
-                checked={isMealSelected("lunch")}
-                onCheckedChange={() => toggleMeal(day, "lunch")}
-              />
-            </TableCell>
-            <TableCell>{lunch?.type || "—"}</TableCell>
-            <TableCell>{lunch?.time || "—"}</TableCell>
-            <TableCell className="font-medium text-orange-600">
-              {lunch?.cost ? `${lunch.cost}/-` : "—"}
-            </TableCell>
-            <TableCell>{lunch?.items || "—"}</TableCell>
-          </TableRow>
-
-          <TableRow className={getRowClass("dinner")}>
-            <TableCell className="text-center">
-              <Checkbox
-                className="border-gray-400"
-                checked={isMealSelected("dinner")}
-                onCheckedChange={() => toggleMeal(day, "dinner")}
-              />
-            </TableCell>
-            <TableCell>{dinner?.type || "—"}</TableCell>
-            <TableCell>{dinner?.time || "—"}</TableCell>
-            <TableCell className="font-medium text-orange-600">
-              {dinner?.cost ? `${dinner.cost}/-` : "—"}
-            </TableCell>
-            <TableCell>{dinner?.items || "—"}</TableCell>
-          </TableRow>
+          {(["breakfast", "lunch", "dinner"] as MealType[]).map((mealType) => {
+            const meal = { breakfast, lunch, dinner }[mealType];
+            return (
+              <TableRow key={mealType} className={getRowClass(mealType)}>
+                <TableCell className="text-center">
+                  <Checkbox
+                    className="border-white"
+                    checked={isMealSelected(mealType)}
+                    onCheckedChange={() => toggleMeal(day, mealType)}
+                  />
+                </TableCell>
+                <TableCell className="text-white">{meal?.type || "—"}</TableCell>
+                <TableCell className="text-white">{meal?.time || "—"}</TableCell>
+                <TableCell className="font-medium text-orange-500">
+                  {meal?.cost ? `${meal.cost}/-` : "—"}
+                </TableCell>
+                <TableCell className="text-white">{meal?.items || "—"}</TableCell>
+              </TableRow>
+            );
+          })}
         </TableBody>
       </Table>
     </div>

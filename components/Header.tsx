@@ -31,7 +31,7 @@ const Header = () => {
   const itemsToShow = role === "admin" ? adminNavItems : navItems;
 
   return (
-    <header className="bg-black/50 backdrop-blur-sm sticky top-0 shadow-md z-20">
+    <header className="z-30 bg-black/80 backdrop-blur-sm border-t border-gray-700 sticky top-0 shadow-md">
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-3">
         <Link href="/">
           <Image
@@ -68,12 +68,9 @@ const Header = () => {
         <div className="flex items-center space-x-4">
           <SignedOut>
             <SignInButton>
-              <Button
-                variant="outline"
-                className="flex items-center gap-2 rounded-full px-4 py-2 hover:text-orange-400 hover:border-orange-400 transition"
-              >
-                <User size={18} />
-                <span className="hidden sm:inline">Sign in</span>
+              <Button className="flex items-center gap-2 rounded-full px-4 py-2 hover:text-orange-400 hover:border-orange-400 transition border">
+                <User size={22} />
+                <span>Sign in</span>
               </Button>
             </SignInButton>
           </SignedOut>

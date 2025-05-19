@@ -19,5 +19,5 @@ export default async function AdminLayout({
     redirect("/");
   }
 
-  return <div className="mx-12">{children}</div>;
+  return <div className="bg-transparent">{children}</div>;
 }

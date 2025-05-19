@@ -30,25 +30,28 @@ const TodayMeal = async () => {
   ];
 
   return (
-    <div className="w-full mt-10 bg-white p-6 rounded-2xl shadow-md">
+    <div className="mt-10 bg-transparent p-6 rounded-2xl shadow-md text-white">
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold text-gray-800">Today&apos;s Menu</h2>
+        <h2 className="text-xl sm:text-2xl font-bold text-white">Today&apos;s Menu</h2>
         <Link href="/admin/menu">
-          <Button className="rounded-xl">Update Menu</Button>
+          <Button className="rounded-xl border bg-transparent">Update Menu</Button>
         </Link>
       </div>
 
       <div className="overflow-x-auto">
-        <Table className="min-w-[400px]">
+        <Table className="min-w-[400px] text-white">
           <TableHeader>
-            <TableRow>
-              <TableHead className="text-lg text-gray-600">Meal</TableHead>
-              <TableHead className="text-lg text-gray-600">Items</TableHead>
+            <TableRow className="bg-transparent">
+              <TableHead className="text-lg text-white">Meal</TableHead>
+              <TableHead className="text-lg text-white">Items</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {items.map((item) => (
-              <TableRow key={item.meal}>
+              <TableRow
+                key={item.meal}
+                className="bg-transparent hover:bg-white/10 transition-colors"
+              >
                 <TableCell className="font-semibold uppercase">{item.meal}</TableCell>
                 <TableCell>{item.items}</TableCell>
               </TableRow>

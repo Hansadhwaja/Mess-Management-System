@@ -15,9 +15,9 @@ const ExistingOrder = async ({ coupons }: ExistingOrderProps) => {
         {coupons.map((couponDay) => (
           <div
             key={couponDay.day}
-            className="rounded-xl shadow-md bg-white border border-gray-200 p-6"
+            className="rounded-xl shadow-md border border-gray-200 p-6"
           >
-            <h2 className="text-xl font-semibold text-gray-800 uppercase mb-4 border-b pb-2">
+            <h2 className="text-xl font-semibold text-gray-100 uppercase mb-4 border-b pb-2">
               {couponDay.day}
             </h2>
             <PerDayCoupon meals={couponDay.meals} day={couponDay.day} />

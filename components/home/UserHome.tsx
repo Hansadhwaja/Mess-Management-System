@@ -10,9 +10,9 @@ const features = [
 
 const UserHome = () => {
   return (
-    <div className="relative min-h-screen w-full overflow-hidden">
-      <div className="absolute inset-0 bg-black/50 z-10" />
-      <div className="relative z-20 flex flex-col items-center justify-center min-h-screen px-6 text-white text-center">
+    <div className="relative w-full pt-24 h-full">
+      <div className="absolute inset-0 bg-black/50 z-10 h-full" />
+      <div className="relative z-20 flex flex-col items-center justify-center px-6 text-white text-center">
         <div className="bg-black/60 p-10 rounded-xl backdrop-blur-md shadow-2xl max-w-2xl w-full space-y-8">
           <h1 className="text-4xl md:text-5xl font-extrabold leading-tight">
             Welcome to <span className="text-orange-400">Mess Management</span>

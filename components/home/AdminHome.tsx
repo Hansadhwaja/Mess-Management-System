@@ -10,14 +10,9 @@ const features = [
 
 const AdminHome = () => {
   return (
-    <div className="relative min-h-screen w-full overflow-hidden">
-     
-
-      {/* Dark Overlay */}
+    <div className="relative w-full h-full">
       <div className="absolute inset-0 bg-black/60 z-10" />
-
-      {/* Foreground Content */}
-      <div className="relative z-20 flex flex-col items-center justify-center min-h-screen px-6 text-white text-center">
+      <div className="relative z-20 flex flex-col items-center justify-center px-6 text-white text-center h-full">
         <div className="bg-black/60 p-10 rounded-xl backdrop-blur-md shadow-2xl max-w-2xl w-full space-y-8">
           <h1 className="text-4xl md:text-5xl font-extrabold leading-tight text-blue-300">
             Welcome Admin

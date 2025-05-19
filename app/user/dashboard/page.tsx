@@ -9,20 +9,20 @@ const UserDashboard = async () => {
   const menuItems = await getMenuItems();
 
   return (
-    <div className="min-h-screen py-10 px-4 md:px-8 flex flex-col items-center">
+    <div className="py-10 px-4 md:px-8 flex flex-col items-center">
       <div className="w-full max-w-4xl mb-10">
         <PendingPurchase />
       </div>
 
-      <div className="w-full max-w-4xl bg-white p-6 rounded-xl shadow-sm">
+      <div className="w-full max-w-4xl bg-black/50 backdrop-blur-2xl p-6 rounded-xl shadow-sm">
         <div className="mb-6">
-          <p className="text-gray-700 text-lg">
+          <p className="text-gray-100  text-sm sm:text-lg">
             Weekly Menu for{" "}
-            <span className="font-semibold text-xl text-orange-600 underline">
+            <span className="font-semibold  text-[16px] sm:text-xl text-orange-500 underline">
               {week}
             </span>
           </p>
-          <h1 className="text-3xl font-bold mt-2 text-gray-900">
+          <h1 className=" sm:text-xl md:text-3xl font-bold mt-2 text-white">
             This Week&apos;s Menu
           </h1>
         </div>

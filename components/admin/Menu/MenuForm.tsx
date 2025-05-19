@@ -60,9 +60,9 @@ const MenuForm = ({ menuItems }: { menuItems: EditedMenuItem[] }) => {
     if (selectedDay) {
       const matchedItem = menuItems.find((item) => item.day === selectedDay);
       if (matchedItem) {
-        form.setValue("breakfast", matchedItem?.breakfast);
-        form.setValue("lunch", matchedItem?.lunch);
-        form.setValue("dinner", matchedItem?.dinner);
+        form.setValue("breakfast", matchedItem.breakfast);
+        form.setValue("lunch", matchedItem.lunch);
+        form.setValue("dinner", matchedItem.dinner);
       } else {
         form.setValue("breakfast", "");
         form.setValue("lunch", "");
@@ -72,8 +72,7 @@ const MenuForm = ({ menuItems }: { menuItems: EditedMenuItem[] }) => {
   }, [selectedDay, menuItems, form]);
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    const updatedMenu = { ...values };
-    const response = await updateMenu(updatedMenu);
+    const response = await updateMenu(values);
     if (response.status === 200) {
       clearForm();
       redirect("/admin/menu");
@@ -83,29 +82,26 @@ const MenuForm = ({ menuItems }: { menuItems: EditedMenuItem[] }) => {
   }
 
   return (
-    <div className="bg-white border border-gray-300 p-8 rounded-2xl shadow-lg max-w-2xl mx-auto mt-12">
-      <h2 className="text-2xl font-semibold text-gray-900 mb-8 text-center">
-        Edit Menu
-      </h2>
+    <div className="bg-black/60 backdrop-blur-xl text-white border border-white/20 p-6 md:p-10 rounded-2xl shadow-xl w-[95%] max-w-2xl mx-auto mt-10 md:mt-16">
+      <h1 className="text-2xl md:text-3xl font-bold mb-6 md:mb-10 text-center">
+        Edit Weekly Menu
+      </h1>
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-          {/* Day */}
           <FormField
             control={form.control}
             name="day"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-sm font-medium text-gray-700">
-                  Day
-                </FormLabel>
+                <FormLabel className="text-sm font-semibold">Day</FormLabel>
                 <Select onValueChange={field.onChange} value={field.value}>
                   <FormControl>
-                    <SelectTrigger>
+                    <SelectTrigger className="bg-white/10 text-white border-white/20">
                       <SelectValue placeholder="Select a day" />
                     </SelectTrigger>
                   </FormControl>
-                  <SelectContent>
+                  <SelectContent className="bg-black/10 backdrop-blur-2xl text-white">
                     {dayOrder.map((day) => (
                       <SelectItem className="capitalize" key={day} value={day}>
                         {day}
@@ -118,74 +114,34 @@ const MenuForm = ({ menuItems }: { menuItems: EditedMenuItem[] }) => {
             )}
           />
 
-          {/* Breakfast */}
-          <FormField
-            control={form.control}
-            name="breakfast"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text-sm font-medium text-gray-700">
-                  Breakfast
-                </FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="e.g., Poha, Matar Curry, Jalebi (1 pc)"
-                    {...field}
-                    className="placeholder-gray-400"
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          {/* Lunch */}
-          <FormField
-            control={form.control}
-            name="lunch"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text-sm font-medium text-gray-700">
-                  Lunch
-                </FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="e.g., Rice, Roti, Arhar Dal, Chana Masala"
-                    {...field}
-                    className="placeholder-gray-400"
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          {/* Dinner */}
-          <FormField
-            control={form.control}
-            name="dinner"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text-sm font-medium text-gray-700">
-                  Dinner
-                </FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="e.g., Roti, Bhindi Aloo, Suji Kheer"
-                    {...field}
-                    className="placeholder-gray-400"
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          {["breakfast", "lunch", "dinner"].map((meal) => (
+            <FormField
+              key={meal}
+              control={form.control}
+              name={meal as "breakfast" | "lunch" | "dinner"}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-sm font-semibold capitalize">
+                    {meal}
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder={`Enter ${meal} items`}
+                      {...field}
+                      className="bg-white/10 text-white placeholder-white/60 border-white/20"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          ))}
 
           <div className="flex justify-end">
             <Button
               disabled={!form.formState.isValid}
               type="submit"
-              className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-md transition disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-blue-400"
+              className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-lg transition disabled:opacity-50"
             >
               Submit
             </Button>

@@ -1,43 +1,53 @@
+import { Home, LayoutDashboard, List, ScanQrCode, SquareMenu, Ticket, User } from "lucide-react";
 
 export const navItems = [
     {
         name: "Home",
-        link: "/"
+        link: "/",
+        icon: Home
     },
     {
         name: "Dashboard",
-        link: "/user/dashboard"
+        link: "/user/dashboard",
+        icon: LayoutDashboard
     },
     {
         name: "Coupon",
-        link: "/user/coupon"
+        link: "/user/coupon",
+        icon: Ticket
     }
 ];
 
 export const adminNavItems = [
     {
         name: "Home",
-        link: "/"
+        link: "/",
+        icon: Home
     },
     {
         name: "Dashboard",
-        link: "/admin/dashboard"
+        link: "/admin/dashboard",
+        icon: LayoutDashboard
     },
     {
         name: "Menu",
-        link: "/admin/menu"
+        link: "/admin/menu",
+        icon: SquareMenu
     },
     {
         name: "Orders",
-        link: "/admin/orders"
+        link: "/admin/orders",
+        icon: List
     },
     {
         name: "Users",
-        link: "/admin/users"
+        link: "/admin/users",
+        icon: User
     },
     {
         name: "Scanner",
-        link: "/admin/scanner"
+        link: "/admin/scanner",
+        icon:ScanQrCode
     }
 ];
 

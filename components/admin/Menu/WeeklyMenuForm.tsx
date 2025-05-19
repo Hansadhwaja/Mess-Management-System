@@ -77,7 +77,7 @@ const WeeklyMenuForm = () => {
   return (
     <div className="max-w-md mx-auto bg-white p-8 rounded-2xl shadow-lg border border-gray-200">
       <div className="mb-8 text-center">
-        <h2 className="text-3xl font-semibold text-gray-900">
+        <h2 className="text-xl sm:text-3xl font-semibold text-gray-900">
           Weekly Meal Planner
         </h2>
         <p className="mt-2 text-gray-600 text-sm sm:text-base">

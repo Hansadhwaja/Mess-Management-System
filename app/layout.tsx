@@ -5,6 +5,8 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import BackgroundWrapper from "@/components/BackgroundWrapper";
 import Header from "@/components/Header";
+import BottomNav from "@/components/BottomNav";
+import SaveUserToDb from "@/components/User/SaveUserToDb";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,11 +36,13 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased relative h-screen overflow-y-auto`}
+          className={`${geistSans.variable} ${geistMono.variable} antialiased relative h-screen flex flex-col`}
         >
           <BackgroundWrapper />
           <Header />
-          <main>{children}</main>
+          <SaveUserToDb />
+          <main className="flex-1 overflow-y-auto">{children}</main>
+           <BottomNav />
           <Toaster />
         </body>
       </html>
