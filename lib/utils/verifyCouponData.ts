@@ -2,6 +2,12 @@ import { Time } from '@/types/types';
 import { getFormattedWeek } from './getFormattedWeek';
 import { getTimes } from '../actions/timeActions';
 
+import { toZonedTime } from 'date-fns-tz';
+import { format } from 'date-fns';
+
+
+const TIME_ZONE = 'Asia/Kolkata';
+
 function parseTime12HourToMinutes(timeStr: string): number {
   if (!timeStr) return -1;
 
@@ -30,12 +36,11 @@ export const verifyCouponData = async ({
   day: string;
   meal: string;
 }) => {
-  const now = new Date();
+  const now = toZonedTime(new Date(), TIME_ZONE);
 
   const currentFormattedWeek = getFormattedWeek();
 
-  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-  const currentDay = days[now.getDay()];
+  const currentDay = format(now, 'EEEE');
 
   const timeSlots = await getTimes();
 
@@ -48,20 +53,17 @@ export const verifyCouponData = async ({
     const startStr = startStrRaw?.trim();
     const endStr = endStrRaw?.trim();
 
-
     if (!startStr || !endStr) return false;
 
     const startMinutes = parseTime12HourToMinutes(startStr);
     const endMinutes = parseTime12HourToMinutes(endStr);
-  
-if (startMinutes < endMinutes) {
-  return currentMinutes >= startMinutes && currentMinutes < endMinutes;
-} else {
-  return currentMinutes >= startMinutes || currentMinutes < endMinutes;
-}
 
+    if (startMinutes < endMinutes) {
+      return currentMinutes >= startMinutes && currentMinutes < endMinutes;
+    } else {
+      return currentMinutes >= startMinutes || currentMinutes < endMinutes;
+    }
   });
-
 
   const currentMeal = activeMealSlot?.meal?.toLowerCase() || 'none';
 
